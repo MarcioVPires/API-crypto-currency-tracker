@@ -15,12 +15,16 @@ use App\Http\Controllers\CoinsDataController;
 |
 */
 
-Route::get('/coins', [CoinsDataController::class, 'coinslist']);
-Route::get('/search-coins-name', [CoinsDataController::class, 'searchCoin']);
-Route::get('/search-coins-date-time', [CoinsDataController::class, 'dateTimePriceSearch']);
-Route::get('/get-current-price', [CoinsDataController::class, 'currentPrice']);
-Route::get('/favorite', [CoinsDataController::class, 'favorite']);
-Route::get('/populate', [CoinsDataController::class, 'populate']);
+Route::middleware(['cors'])->group(function () {
+    Route::get('/coins', [CoinsDataController::class, 'coinslist']);
+    Route::get('/search-coins-name', [CoinsDataController::class, 'searchCoin']);
+    Route::get('/search-coins-date-time', [CoinsDataController::class, 'dateTimePriceSearch']);
+    Route::get('/get-current-price', [CoinsDataController::class, 'currentPrice']);
+    Route::get('/favorite', [CoinsDataController::class, 'favorite']);
+    Route::get('/populate', [CoinsDataController::class, 'populate']);
+});
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
