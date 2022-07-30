@@ -78,7 +78,7 @@ class CoinsDataController extends Controller
 
     public function dateTimePriceSearch(Request $request){
 
-        $call = Http::get("https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=usd&from={$request->from}&to={$request->to}");
+        $call = Http::get("https://api.coingecko.com/api/v3/coins/{$request['coin']}/market_chart/range?vs_currency=usd&from={$request['from']}&to={$request['to']}");
         $response = $call->json();
         $length = count($response['prices']);
   
