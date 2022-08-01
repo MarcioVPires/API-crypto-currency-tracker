@@ -1,64 +1,206 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Crypto Currency Tracker API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> This repository will report about the BackEnd part of the FullStack test to see the FrontEnd report please [Acess This Link](https://github.com/MarcioVPires/crypto-currency-tracker)
 
-## About Laravel
+## Installing
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+To install this project and run locally follow the steps bellow:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Download or Clone the repository:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```
+git clone git@github.com:MarcioVPires/api-crypto-currency-tracker.git
+```
 
-## Learning Laravel
+Install the dependencies:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```
+npm install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Run the project:
 
-## Laravel Sponsors
+```
+php artisan serve
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+### Local DataBase
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+I used Postgres in this project, you can use any sql based db, the only thing you have to do is to fill the .env variables with the credentials of the db you will use.
 
-## Contributing
+For that, access the .env file in the root directory, locate the lines of code below and fill with your info.
+```
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=laravel_test
+DB_USERNAME=postgres
+DB_PASSWORD=password
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Endpoints & Functionalities
 
-## Code of Conduct
+The baseURL for all endpoint is: **api-crypto-currency-tracker.herokuapp.com/api**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1️⃣ **List**
+```
+/coins
+```
+Returns all the coins in the DB with the following format:
+```
+[
+	{
+	"id": 1,
+	"coin_id": "bitcoin",
+	"symbol": "btc",
+	"name": "Bitcoin",
+	"image": "https:\/\/assets.coingecko.com\/coins\/images\/1\/large\/bitcoin.png?1547033579",
+	"current_price": "23419.00000000",
+	"market_cap": 454720580470,
+	"total_volume": 40505595383,
+	"price_change_percentage_24h": "0.08",
+	"price_change_percentage_1h_in_currency": "-0.17",
+	"favorite": true,
+	"created_at": "2022-07-30T02:57:04.000000Z",
+	"updated_at": "2022-08-01T04:27:29.000000Z"
+},
+{
+	"id": 2,
+	"coin_id": "ethereum",
+	"symbol": "eth",
+	"name": "Ethereum",
+	"image": "https:\/\/assets.coingecko.com\/coins\/images\/279\/large\/ethereum.png?1595348880",
+	"current_price": "1693.77000000",
+	"market_cap": 204969740163,
+	"total_volume": 21268656995,
+	"price_change_percentage_24h": "-0.20",
+	"price_change_percentage_1h_in_currency": "0.36",
+	"favorite": true,
+	"created_at": "2022-07-30T02:57:04.000000Z",
+	"updated_at": "2022-08-01T04:27:29.000000Z"
+}
+]
 
-## Security Vulnerabilities
+...more
+```
+&nbsp;
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2️⃣ **Search Coin**
+```
+/search-coins-name
+```
+This request needs a json body with the coin_id of the currency. **Always put the value in lowercase**
+```
+{
+	"coin": "litecoin"
+}
+```
 
-## License
+First the api search for the coin in the coingecko endpoint *api.coingecko.com/api/v3/coins/{$request['coin']}*
+Then it formats the response using only the data we will need, save in the DB and return to the user
+```
+{
+	"id": 1,
+	"coin_id": "bitcoin",
+	"symbol": "btc",
+	"name": "Bitcoin",
+	"image": "https:\/\/assets.coingecko.com\/coins\/images\/1\/large\/bitcoin.png?1547033579",
+	"current_price": "23419.00000000",
+	"market_cap": 454720580470,
+	"total_volume": 40505595383,
+	"price_change_percentage_24h": "0.08",
+	"price_change_percentage_1h_in_currency": "-0.17",
+	"favorite": true,
+	"created_at": "2022-07-30T02:57:04.000000Z",
+	"updated_at": "2022-08-01T04:27:29.000000Z"
+},
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+&nbsp;
+
+3️⃣ **Search Coin price based on date and time**
+```
+/search-coins-date-time
+```
+This request needs a json body with the coin_id and two timestamps in unix format.
+**from** = one hour earlier from the date/ time you really want. 
+**to** = The date/ time you really want. 
+```
+{
+	"coin": "bitcoin",
+	"from": 1659233460,
+	"to": 1659237060
+}
+```
+The response will cointain all the price changes from 1h earlier to the given time.Then the api selects the last price change and send to the user
+```
+[
+	1659237013038,
+	23806.989534889515
+]
+```
+&nbsp;
+
+4️⃣ **Current Price**
+```
+/get-current-price
+```
+
+This endpoint will return a list of prices of all coins in the DB marked as favorite
+```
+{
+	"cosmos": {
+		"usd": 10.59
+	},
+	"dacxi": {
+		"usd": 0.00175708
+	},
+	"terra-luna-2": {
+		"usd": 1.93
+	},
+	"bitcoin": {
+		"usd": 23418
+	},
+	"ethereum": {
+		"usd": 1694.14
+	}
+}
+```
+&nbsp;
+
+5️⃣ **Favorite**
+```
+/favorite
+```
+This request needs a json body with the coin_id and a boolean value.
+```
+{
+	"id": "dogecoin",
+	"favorite": true
+}
+```
+This endpoint will change the favorite status of any coin in the DB
+
+&nbsp;
+
+6️⃣ **Populate**
+```
+/populate
+```
+
+This a **"development endpoint" only**. It's used to put all the required coins in the database.
+This allows the dev to easely put data on DB in case the DB needs to be deleted or moved.
+&nbsp;
+
+> All the endpoint was create and its working. But not all of then its used in the FrontEnd right now.
+
+# Improvements
+
+There's a lot of room for improvements, some of the things I have in mind:
+
+- Error Treatment for every data handling in te api.
+- Configure cors to only accept calls from a specific URL
+- A login functionality to allow the front end to pull the new favorite coins from the DB instead of localStorage
+
+
